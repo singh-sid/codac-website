@@ -1,0 +1,172 @@
+<!-- Created by Sid Singh 2022 -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Self-Driving Golf Cart</title>
+        <link rel="icon" type="image/x-icon" href="assets/nav_main.ico" />
+        <!-- Font Awesome icons-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <img src="assets/img/nav_main.svg">
+                <a class="navbar-brand" href="#page-top">An Auburn University Capstone Design Project</a>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="masthead text-center text-white">
+            <div class="masthead-content">
+                <div class="container px-5">
+                    <h1 class="masthead-heading mb-0">Self-Driving Golf Cart</h1>
+                    <h2 class="masthead-subheading mb-0">Sponsored by Club Car</h2>
+                    <a class="btn btn-secondary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+                </div>
+            </div>
+        </header>
+
+        <div id="render-canvas"></div>
+
+        <!-- Content section 1-->
+        <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                        <div class="p-5">
+                            <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Team Members</th>
+                                <th scope="col">Contact</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Sid Singh</td>
+                                <td>sks0076@auburn.edu</td>
+                              </tr>
+                              <tr>
+                                <td>Ryan Hubbart</td>
+                                <td>rjh0045@auburn.edu</td>
+                              </tr>
+                              <tr>
+                                <td>Eddie Smith</td>
+                                <td>bes0050@auburn.edu</td>
+                              </tr>
+                              <tr>
+                                <td>Nathan Harrison</td>
+                                <td>nhh0009@auburn.edu</td>
+                              </tr>
+                            </tbody>
+                          </table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content section 2-->
+        <section>
+          <div class="container px-5 align-items-center">
+            <div class ="p-3">This project is a part of the SPaRC golf cart team’s project to create a self driving golf cart for Club Car. This self driving cart is to be designed to be able to navigate facilities such as our campus or another park where there would be heavy foot traffic around it. This team’s goal was to specialize on the Obstacle Avoidance of the self-driving cart. The work breakdown structure of our project is divided into three categories: Software, Hardware, and Testing.</div>
+            <div class ="p-3">
+              Obstacle detection is required for the safety of the golf cart and the environment it is operating in.  The cart will use four ultrasonic sensors along with a LiDAR sensor to scan the surroundings as it maneuvers to its end destination.
+              The LiDAR, which is placed on top of the golf cart, is used for gathering imaging of the overall greater surroundings.  The LiDAR sensor is the responsibility of a different sub team on the golf cart project.  The ultrasonic sensors detect objects much closer to the cart and will be our main focus as we seek to develop obstacle avoidance capabilities for the golf cart. The ultrasonic sensors have a range of 2 meters.  Two ultrasonic sensors will be placed on the front of the cart and two will be placed on the rear of the cart.  The sensors will be installed underneath where the headlights and taillights are located on the golf cart.  Being installed in this location, the ultrasonic sensors will detect objects directly in front of the cart's path whether they are fixed or moving objects.  Some of these objects might be in the blind spot of the LiDAR sensor with the LiDAR sensor being placed on top of the cart.  
+            </div>
+            <div class ="p-3"></div>
+            <div class ="p-3"></div>
+          </div>
+        </section>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-aublue">
+            <div class="container px-5"><p class="m-0 text-center text-white small">&copy; Copyright 2022. All rights reserved.</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+
+    <!-- Render Section-->
+    <div class="render">
+      <script src="three.js"></script>
+      <script type="module" src="GLTFLoader.js"></script>
+      <script type="module">
+        import { GLTFLoader } from "./GLTFLoader.js";
+  
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight/3), 0.01, 1000);
+        var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true});
+        renderer.setSize(window.innerWidth, window.innerHeight/3);
+        renderer.setClearColor( 0xffffff, 1);
+
+        //place renderer on page
+        document.getElementById('render-canvas').appendChild(renderer.domElement);
+  
+        /**
+        
+        //background
+        var textureLoader = new THREE.TextureLoader();
+        var tilesBaseColor = textureLoader.load("./assets/img/");
+        const plane = new THREE.Mesh(new THREE.PlaneGeometry(96,54),
+          new THREE.MeshBasicMaterial({ map: tilesBaseColor }));
+        plane.position.set(0,0,-8);
+        scene.add(plane);
+
+        **/
+
+        //spotlight
+        const spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( 0, 0, 2 );
+        spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.camera.near = 500;
+        spotLight.shadow.camera.far = 4000;
+        spotLight.shadow.camera.fov = 30;
+        scene.add( spotLight );
+  
+        var loader = new GLTFLoader();
+  
+        var obj1;
+        loader.load("./assets/scene.gltf", function (gltf) {
+          obj1 = gltf.scene;
+          obj1.position.set(0, -0.25, 0);
+          scene.add(gltf.scene);
+        })
+
+        var light = new THREE.HemisphereLight(0x000000, 0x000000, 2);
+        light.castShadow = true;
+        scene.add(light);
+        camera.position.set(0, 0.2, 2);
+  
+        //Handle screen dynamics - Sid is cool
+        window.addEventListener('resize', onWindowResize, false);
+        function onWindowResize() {
+          camera.aspect = window.innerWidth / (window.innerHeight/3);
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight/3);
+        }
+  
+        function animate() {
+          requestAnimationFrame(animate);
+          obj1.rotation.y += 0.0025;
+          renderer.render(scene, camera);
+        }
+        animate();
+  
+      </script>
+    </div>
+
+</html>
